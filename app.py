@@ -20,10 +20,8 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file is not None:
 
-    # ==========================
-    # READ PDF
-    # ==========================
 
+    # READ PDF
     pdf = PdfReader(uploaded_file)
 
     text = ""
@@ -34,10 +32,8 @@ if uploaded_file is not None:
         if page_text:
             text += page_text
 
-    # ==========================
+   
     # TITLE
-    # ==========================
-
     st.subheader("📌 Research Paper Title")
 
     lines = [line.strip() for line in text.split("\n") if line.strip()]
@@ -58,10 +54,8 @@ if uploaded_file is not None:
 
     st.write(title)
 
-    # ==========================
+   
     # KEYWORDS
-    # ==========================
-
     st.subheader("🏷️ Keywords")
 
     kw_extractor = yake.KeywordExtractor(
@@ -75,10 +69,7 @@ if uploaded_file is not None:
     for keyword, score in keywords:
         st.write(f"• {keyword}")
 
-    # ==========================
     # ABSTRACT
-    # ==========================
-
     st.subheader("📄 Abstract")
 
     abstract = "Abstract not found."
@@ -93,10 +84,8 @@ if uploaded_file is not None:
 
     st.write(abstract[:2000])
 
-    # ==========================
+   
     # DIFFICULTY LEVEL
-    # ==========================
-
     st.subheader("📊 Difficulty Level")
 
     word_count = len(text.split())
@@ -110,10 +99,7 @@ if uploaded_file is not None:
     else:
         st.error("Advanced Level")
 
-    # ==========================
     # KEY FINDINGS
-    # ==========================
-
     st.subheader("🎯 Key Findings")
 
     try:
@@ -135,10 +121,8 @@ if uploaded_file is not None:
     except Exception:
         st.write("Could not extract findings.")
 
-    # ==========================
+    
     # QUIZ GENERATOR
-    # ==========================
-
     st.subheader("🧠 Quiz Generator")
 
     quiz_sentences = []
@@ -177,26 +161,19 @@ if uploaded_file is not None:
 
             st.write("---")
 
-    # ==========================
+   
     # RESEARCH OVERVIEW
-    # ==========================
-
     st.subheader("📝 Research Overview")
 
     st.write(text[:1000])
 
-    # ==========================
-    # EXTRACTED TEXT
-    # ==========================
 
+    # EXTRACTED TEXT
     st.subheader("📚 Extracted Text")
 
     st.write(text[:5000])
 
-    # ==========================
     # DOWNLOAD BUTTON
-    # ==========================
-
     st.download_button(
         label="📥 Download Extracted Text",
         data=text,
